@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy.reader.CourseReaderActivity
-import com.example.academy.reader.CourseReaderViewModel
 import com.example.academy.R
 import com.example.academy.data.ModuleEntity
 import com.example.academy.reader.CourseReaderCallback
+import com.example.academy.reader.CourseReaderViewModel
 import kotlinx.android.synthetic.main.fragment_module_list.*
 
 /**

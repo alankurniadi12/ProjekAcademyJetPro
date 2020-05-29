@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.academy.reader.CourseReaderViewModel
 import com.example.academy.R
 import com.example.academy.data.ModuleEntity
+import com.example.academy.reader.CourseReaderViewModel
 import kotlinx.android.synthetic.main.fragment_module_content.*
 
 /**
