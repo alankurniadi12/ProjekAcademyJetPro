@@ -2,6 +2,7 @@ package com.example.academy.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -25,9 +26,7 @@ class DetailCourseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_course)
         setSupportActionBar(toolbar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         val adapter = DetailCourseAdapter()
 
         val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
@@ -39,19 +38,18 @@ class DetailCourseActivity : AppCompatActivity() {
                 viewModel.setSelectedCourse(courseId)
                 val modules = viewModel.getModules()
                 adapter.setModules(modules)
-                populateCourse(viewModel.getCourse())
+                viewModel.getCourse()?.let { populateCourse(it) }
 
             }
         }
 
-        with(rv_module){
-            isNestedScrollingEnabled = false
-            layoutManager = LinearLayoutManager(this@DetailCourseActivity)
-            setHasFixedSize(true)
-            this.adapter = adapter
-            val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
-            addItemDecoration(dividerItemDecoration)
-        }
+        rv_module.isNestedScrollingEnabled = false
+        rv_module.layoutManager = LinearLayoutManager(this)
+        rv_module.setHasFixedSize(true)
+        rv_module.adapter = adapter
+        val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
+        rv_module.addItemDecoration(dividerItemDecoration)
+
     }
 
 
@@ -67,9 +65,9 @@ class DetailCourseActivity : AppCompatActivity() {
             .into(image_poster)
 
         btn_start.setOnClickListener {
-            val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java).apply {
-                putExtra(CourseReaderActivity.EXTRA_COURSE_ID, courseEntity.courseId)
-            }
+            val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java)
+            intent.putExtra(CourseReaderActivity.EXTRA_COURSE_ID, courseEntity.courseId)
+            Log.d("btn_start", "Button Mulai Belajar pressed")
             startActivity(intent)
         }
     }

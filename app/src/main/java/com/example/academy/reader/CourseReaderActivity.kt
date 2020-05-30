@@ -16,7 +16,6 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_reader)
-
         val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
 
         val bundle = intent.extras
@@ -46,15 +45,12 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
 
     private fun populateFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        var fragment = supportFragmentManager.findFragmentByTag(ModuleContentFragment.TAG)
+        var fragment = supportFragmentManager.findFragmentByTag(ModuleListFragment.TAG)
         if (fragment == null) {
-            fragment = ModuleContentFragment.newInstance()
+            fragment = ModuleListFragment.newInstance()
             fragmentTransaction.add(R.id.frame_container, fragment, ModuleListFragment.TAG)
             fragmentTransaction.addToBackStack(null)
         }
         fragmentTransaction.commit()
     }
-
-
-
 }

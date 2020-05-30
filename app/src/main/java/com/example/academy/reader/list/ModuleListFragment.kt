@@ -23,7 +23,6 @@ class ModuleListFragment : Fragment(), MyAdapterClickListener {
 
     companion object {
         val TAG = ModuleListFragment::class.java.simpleName
-
         fun newInstance(): ModuleListFragment = ModuleListFragment()
     }
 
@@ -59,11 +58,9 @@ class ModuleListFragment : Fragment(), MyAdapterClickListener {
     private fun populateRecyclerView(modules: List<ModuleEntity>) {
         progress_bar.visibility = View.GONE
         adapter.setModules(modules)
-        with(rv_module){
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            adapter = adapter
-        }
+        rv_module.layoutManager = LinearLayoutManager(context)
+        rv_module.setHasFixedSize(true)
+        rv_module.adapter = adapter
         val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
         rv_module.addItemDecoration(dividerItemDecoration)
     }

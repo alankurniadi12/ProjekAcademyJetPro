@@ -10,7 +10,6 @@ import com.example.academy.R
 import com.example.academy.data.ModuleEntity
 
 class ModuleListAdapter internal constructor(private val listener: MyAdapterClickListener): RecyclerView.Adapter<ModuleListAdapter.ModuleViewHolder>(){
-
     private val listModules = ArrayList<ModuleEntity>()
 
     internal fun setModules(modules: List<ModuleEntity>?){
@@ -23,8 +22,6 @@ class ModuleListAdapter internal constructor(private val listener: MyAdapterClic
         return ModuleViewHolder(view)
     }
 
-    override fun getItemCount(): Int = listModules.size
-
     override fun onBindViewHolder(holder: ModuleViewHolder, position: Int) {
         val module = listModules[position]
         holder.bind(module)
@@ -32,6 +29,8 @@ class ModuleListAdapter internal constructor(private val listener: MyAdapterClic
             listener.onItemClicked(holder.adapterPosition, listModules[holder.adapterPosition].moduleId)
         }
     }
+
+    override fun getItemCount(): Int = listModules.size
 
     inner class ModuleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textTitle: TextView = itemView.findViewById(R.id.text_module_title)

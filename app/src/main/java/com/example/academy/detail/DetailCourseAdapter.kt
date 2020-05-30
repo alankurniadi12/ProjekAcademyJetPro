@@ -23,12 +23,12 @@ class DetailCourseAdapter: RecyclerView.Adapter<DetailCourseAdapter.ModuleViewMo
         return ModuleViewModel(view)
     }
 
-    override fun getItemCount(): Int = listModules.size
-
     override fun onBindViewHolder(holder: ModuleViewModel, position: Int) {
         val module = listModules[position]
         holder.bind(module)
     }
+
+    override fun getItemCount(): Int = listModules.size
 
     inner class ModuleViewModel(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(module: ModuleEntity) {

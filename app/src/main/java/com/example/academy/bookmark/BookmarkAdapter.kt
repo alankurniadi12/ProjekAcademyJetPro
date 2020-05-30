@@ -13,7 +13,6 @@ import com.example.academy.detail.DetailCourseActivity
 import kotlinx.android.synthetic.main.items_bookmark.view.*
 
 class BookmarkAdapter(private val callback: BookMarkFragmentCallback): RecyclerView.Adapter<BookmarkAdapter.CourseViewModel>() {
-
     private val listCourses = ArrayList<CourseEntity>()
 
     fun setCourse(courses: List<CourseEntity>?) {
@@ -27,13 +26,12 @@ class BookmarkAdapter(private val callback: BookMarkFragmentCallback): RecyclerV
         return CourseViewModel(view)
     }
 
-    override fun getItemCount(): Int = listCourses.size
-
     override fun onBindViewHolder(holder: CourseViewModel, position: Int) {
         val course = listCourses[position]
         holder.bind(course)
     }
 
+    override fun getItemCount(): Int = listCourses.size
 
     inner class CourseViewModel(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(course: CourseEntity){
