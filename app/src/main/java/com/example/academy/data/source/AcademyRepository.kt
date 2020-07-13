@@ -31,7 +31,7 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
                 response.imagePath
             )
             courseList.add(course)
-            Log.d("getAllCourses", course.toString())
+            Log.d(TAG, course.toString())
         }
         return courseList
     }

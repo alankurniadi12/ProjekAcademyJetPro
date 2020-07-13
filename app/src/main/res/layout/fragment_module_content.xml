@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
-    tools:context=".reader.content.ModuleContentFragment">
+    tools:context="com.example.academy.ui.reader.content.ModuleContentFragment">
 
     <WebView
         android:id="@+id/web_view"

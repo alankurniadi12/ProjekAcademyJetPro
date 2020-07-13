@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
-    tools:context=".academy.AcademyFragment">
+    tools:context="com.example.academy.ui.academy.AcademyFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_academy"

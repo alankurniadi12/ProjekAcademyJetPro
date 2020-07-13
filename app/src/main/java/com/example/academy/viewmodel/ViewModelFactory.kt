@@ -3,12 +3,12 @@ package com.example.academy.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.academy.academy.AcademyViewModel
-import com.example.academy.bookmark.BookmarkViewModel
+import com.example.academy.ui.academy.AcademyViewModel
+import com.example.academy.ui.bookmark.BookmarkViewModel
 import com.example.academy.data.source.AcademyRepository
-import com.example.academy.detail.DetailCourseViewModel
+import com.example.academy.ui.detail.DetailCourseViewModel
 import com.example.academy.di.Injection
-import com.example.academy.reader.CourseReaderViewModel
+import com.example.academy.ui.reader.CourseReaderViewModel
 
 class ViewModelFactory private constructor(private val mAcademyRepository: AcademyRepository) : ViewModelProvider.NewInstanceFactory(){
 
@@ -23,18 +23,18 @@ class ViewModelFactory private constructor(private val mAcademyRepository: Acade
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        when {
+        return when {
             modelClass.isAssignableFrom(AcademyViewModel::class.java) -> {
-                return AcademyViewModel(mAcademyRepository) as T
+                AcademyViewModel(mAcademyRepository) as T
             }
             modelClass.isAssignableFrom(DetailCourseViewModel::class.java) -> {
-                return DetailCourseViewModel(mAcademyRepository) as T
+                DetailCourseViewModel(mAcademyRepository) as T
             }
             modelClass.isAssignableFrom(BookmarkViewModel::class.java) -> {
-                return BookmarkViewModel(mAcademyRepository) as T
+                BookmarkViewModel(mAcademyRepository) as T
             }
             modelClass.isAssignableFrom(CourseReaderViewModel::class.java) -> {
-                return CourseReaderViewModel(mAcademyRepository) as T
+                CourseReaderViewModel(mAcademyRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
