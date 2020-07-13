@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.academy.reader.CourseReaderActivity
 import com.example.academy.R
 import com.example.academy.data.CourseEntity
+import com.example.academy.viewmodel.ViewModelFactory
 
 import kotlinx.android.synthetic.main.activity_detail_course.*
 import kotlinx.android.synthetic.main.content_detail_course.*
@@ -29,7 +30,8 @@ class DetailCourseActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val adapter = DetailCourseAdapter()
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
         val extras = intent.extras
         if (extras != null) {
@@ -38,7 +40,7 @@ class DetailCourseActivity : AppCompatActivity() {
                 viewModel.setSelectedCourse(courseId)
                 val modules = viewModel.getModules()
                 adapter.setModules(modules)
-                viewModel.getCourse()?.let { populateCourse(it) }
+                viewModel.getCourse().let { populateCourse(it) }
 
             }
         }

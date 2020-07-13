@@ -1,10 +1,10 @@
 package com.example.academy.academy
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -14,6 +14,11 @@ import com.example.academy.detail.DetailCourseActivity
 import kotlinx.android.synthetic.main.items_academy.view.*
 
 class AcademyAdapter: RecyclerView.Adapter<AcademyAdapter.CourseViewModel>() {
+
+    companion object {
+        private val TAG = AcademyAdapter::class.java.simpleName
+    }
+
     private var listCourses = ArrayList<CourseEntity>()
 
     fun setCourses(courses: List<CourseEntity>?) {
@@ -39,6 +44,8 @@ class AcademyAdapter: RecyclerView.Adapter<AcademyAdapter.CourseViewModel>() {
                 tv_item_title.text = course.title
                 tv_item_description.text = course.description
                 tv_item_date.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
+
+                Log.d(TAG, course.toString())
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailCourseActivity::class.java)
