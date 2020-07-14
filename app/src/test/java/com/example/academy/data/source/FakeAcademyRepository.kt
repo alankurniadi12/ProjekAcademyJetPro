@@ -6,17 +6,7 @@ import com.example.academy.data.CourseEntity
 import com.example.academy.data.ModuleEntity
 import com.example.academy.data.source.remote.RemoteDataSource
 
-class AcademyRepository private constructor(private val remoteDataSource: RemoteDataSource): AcademyDataSource{
-    private val TAG = AcademyRepository::class.java.simpleName
-
-    companion object {
-        @Volatile
-        private var instance: AcademyRepository? = null
-
-        fun getInstance(remoteData: RemoteDataSource): AcademyRepository = instance ?: synchronized(this) {
-            instance ?: AcademyRepository(remoteData)
-        }
-    }
+class FakeAcademyRepository (private val remoteDataSource: RemoteDataSource): AcademyDataSource{
 
     override fun getAllCourses(): ArrayList<CourseEntity> {
         val courseResponses = remoteDataSource.getAllCourse()
@@ -31,7 +21,6 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
                 response.imagePath
             )
             courseList.add(course)
-            Log.d(TAG, course.toString())
         }
         return courseList
     }
