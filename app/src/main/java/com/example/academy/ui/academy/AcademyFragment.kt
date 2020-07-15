@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy.R
@@ -16,8 +17,6 @@ import kotlinx.android.synthetic.main.fragment_academy.*
  * A simple [Fragment] subclass.
  */
 class AcademyFragment : Fragment() {
-
-    private val TAG = AcademyFragment::class.java.simpleName
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,11 +30,15 @@ class AcademyFragment : Fragment() {
         if (activity != null){
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[AcademyViewModel::class.java]
-            val courses = viewModel.getCourses()
-            Log.d(TAG, courses.toString())
 
             val academyAdapter = AcademyAdapter()
-            academyAdapter.setCourses(courses)
+            progress_bar.visibility = View.VISIBLE
+            viewModel.getCourses().observe(viewLifecycleOwner, Observer { courses ->
+                progress_bar.visibility = View.GONE
+                academyAdapter.setCourses(courses)
+                academyAdapter.notifyDataSetChanged()
+            })
+
 
             with(rv_academy){
                 layoutManager = LinearLayoutManager(context)

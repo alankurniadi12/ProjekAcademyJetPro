@@ -1,5 +1,6 @@
 package com.example.academy.ui.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.academy.data.CourseEntity
 import com.example.academy.data.ModuleEntity
@@ -12,16 +13,7 @@ class DetailCourseViewModel(private val academyRepository: AcademyRepository): V
         this.courseId = courseId
     }
 
-    fun getCourse(): CourseEntity = academyRepository.getCourseWiithModules(courseId)
-    /*{
-        lateinit var course: CourseEntity
-        for (courseEntity in DataDummy.generateDummyCourses()) {
-            if (courseEntity.courseId == courseId) {
-                course = courseEntity
-            }
-        }
-        return course
-    }*/
+    fun getCourse(): LiveData<CourseEntity> = academyRepository.getCourseWiithModules(courseId)
 
-    fun getModules(): List<ModuleEntity> = academyRepository.getAllModulesByCourse(courseId)
+    fun getModules(): LiveData<List<ModuleEntity>> = academyRepository.getAllModulesByCourse(courseId)
 }
