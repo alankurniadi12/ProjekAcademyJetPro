@@ -1,4 +1,4 @@
-package com.example.academy.data.vo
+package com.example.academy.vo
 
 class Resource<T>(val status: Status, val data: T?, val message: String?) {
     companion object {

@@ -1,4 +1,4 @@
-package com.example.academy.data.vo
+package com.example.academy.vo
 
 enum class Status {
     SUCCESS,

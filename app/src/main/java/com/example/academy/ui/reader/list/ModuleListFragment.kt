@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.academy.ui.reader.CourseReaderActivity
 import com.example.academy.R
 import com.example.academy.data.source.local.entity.ModuleEntity
-import com.example.academy.data.vo.Status
+import com.example.academy.vo.Status
 import com.example.academy.ui.reader.CourseReaderCallback
 import com.example.academy.ui.reader.CourseReaderViewModel
 import com.example.academy.viewmodel.ViewModelFactory

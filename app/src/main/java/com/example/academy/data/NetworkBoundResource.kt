@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.example.academy.data.source.remote.ApiResponse
 import com.example.academy.data.source.remote.StatusResponse
-import com.example.academy.data.vo.Resource
+import com.example.academy.vo.Resource
 import com.example.academy.utils.AppExecutors
 
 abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecutor: AppExecutors) {

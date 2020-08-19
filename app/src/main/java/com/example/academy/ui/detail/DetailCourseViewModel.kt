@@ -6,13 +6,12 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.academy.data.AcademyRepository
 import com.example.academy.data.source.local.entity.CourseWithModule
-import com.example.academy.data.vo.Resource
+import com.example.academy.vo.Resource
 
 class DetailCourseViewModel(private val academyRepository: AcademyRepository): ViewModel() {
-    //private lateinit var courseId: String
     val courseId = MutableLiveData<String>()
 
-    fun setCourseId(courseId: String) {
+    fun setSelectedCourse(courseId: String) {
         this.courseId.value = courseId
     }
 

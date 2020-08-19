@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.academy.data.source.local.entity.CourseEntity
 import com.example.academy.data.source.local.entity.CourseWithModule
 import com.example.academy.data.source.local.entity.ModuleEntity
-import com.example.academy.data.vo.Resource
+import com.example.academy.vo.Resource
 
 interface AcademyDataSource {
 

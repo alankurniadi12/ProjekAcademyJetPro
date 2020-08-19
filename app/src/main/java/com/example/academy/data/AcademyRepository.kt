@@ -1,11 +1,7 @@
 package com.example.academy.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import com.example.academy.data.source.local.LocalDataSource
-import com.example.academy.data.source.local.entity.ContentEntity
 import com.example.academy.data.source.local.entity.CourseEntity
 import com.example.academy.data.source.local.entity.CourseWithModule
 import com.example.academy.data.source.local.entity.ModuleEntity
@@ -14,7 +10,7 @@ import com.example.academy.data.source.remote.RemoteDataSource
 import com.example.academy.data.source.remote.response.ContentResponse
 import com.example.academy.data.source.remote.response.CourseResponse
 import com.example.academy.data.source.remote.response.ModuleResponse
-import com.example.academy.data.vo.Resource
+import com.example.academy.vo.Resource
 import com.example.academy.utils.AppExecutors
 
 class AcademyRepository private constructor(

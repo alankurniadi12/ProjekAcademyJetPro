@@ -18,7 +18,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.academy.ui.reader.CourseReaderActivity
 import com.example.academy.R
 import com.example.academy.data.source.local.entity.CourseEntity
-import com.example.academy.data.vo.Status
+import com.example.academy.vo.Status
 import com.example.academy.viewmodel.ViewModelFactory
 
 import kotlinx.android.synthetic.main.activity_detail_course.*
@@ -47,7 +47,7 @@ class DetailCourseActivity : AppCompatActivity() {
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null){
-                viewModel.setCourseId(courseId)
+                viewModel.setSelectedCourse(courseId)
                 viewModel.courseModule.observe(this, Observer { courseWithModuleResource ->
                     if (courseWithModuleResource != null) {
                         when(courseWithModuleResource.status) {
@@ -68,13 +68,32 @@ class DetailCourseActivity : AppCompatActivity() {
             }
         }
 
-        rv_module.isNestedScrollingEnabled = false
-        rv_module.layoutManager = LinearLayoutManager(this)
-        rv_module.setHasFixedSize(true)
-        rv_module.adapter = adapter
-        val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
-        rv_module.addItemDecoration(dividerItemDecoration)
+        with(rv_module){
+            isNestedScrollingEnabled = false
+            layoutManager = LinearLayoutManager(this@DetailCourseActivity)
+            this.adapter = adapter
+            val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
+            addItemDecoration(dividerItemDecoration)
+        }
+    }
 
+    private fun populateCourse(courseEntity: CourseEntity) {
+        text_title.text = courseEntity.title
+        text_desc.text = courseEntity.description
+        text_date.text = resources.getString(R.string.deadline_date, courseEntity.deadline)
+
+        Glide.with(this)
+            .load(courseEntity.imagePath)
+            .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
+            .error(R.drawable.ic_error)
+            .into(image_poster)
+
+        btn_start.setOnClickListener {
+            val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java)
+            intent.putExtra(CourseReaderActivity.EXTRA_COURSE_ID, courseEntity.courseId)
+            Log.d("btn_start", "Button Mulai Belajar pressed")
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -118,23 +137,6 @@ class DetailCourseActivity : AppCompatActivity() {
     }
 
 
-    private fun populateCourse(courseEntity: CourseEntity) {
-        text_title.text = courseEntity.title
-        text_desc.text = courseEntity.description
-        text_date.text = resources.getString(R.string.deadline_date, courseEntity.deadline)
 
-        Glide.with(this)
-            .load(courseEntity.imagePath)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
-            .error(R.drawable.ic_error)
-            .into(image_poster)
-
-        btn_start.setOnClickListener {
-            val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java)
-            intent.putExtra(CourseReaderActivity.EXTRA_COURSE_ID, courseEntity.courseId)
-            Log.d("btn_start", "Button Mulai Belajar pressed")
-            startActivity(intent)
-        }
-    }
 
 }

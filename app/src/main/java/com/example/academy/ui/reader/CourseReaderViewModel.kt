@@ -6,7 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.academy.data.source.local.entity.ModuleEntity
 import com.example.academy.data.AcademyRepository
-import com.example.academy.data.vo.Resource
+import com.example.academy.vo.Resource
 
 class CourseReaderViewModel(private val academyRepository: AcademyRepository): ViewModel() {
 
