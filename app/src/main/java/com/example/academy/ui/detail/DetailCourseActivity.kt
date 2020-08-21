@@ -40,6 +40,7 @@ class DetailCourseActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapter = DetailCourseAdapter()
+
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
@@ -71,6 +72,7 @@ class DetailCourseActivity : AppCompatActivity() {
         with(rv_module){
             isNestedScrollingEnabled = false
             layoutManager = LinearLayoutManager(this@DetailCourseActivity)
+            setHasFixedSize(true)
             this.adapter = adapter
             val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
             addItemDecoration(dividerItemDecoration)
@@ -132,7 +134,7 @@ class DetailCourseActivity : AppCompatActivity() {
         if (state) {
             menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark_white)
         }else {
-            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark_white)
+            menuItem?.icon = ContextCompat.getDrawable(this, R.drawable.ic_bookmark_border_white)
         }
     }
 

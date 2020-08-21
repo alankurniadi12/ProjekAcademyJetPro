@@ -23,13 +23,13 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
                 fetchFromNetwork(dbSource)
             } else {
                 result.addSource(dbSource) { newData ->
-                    result.value = Resource.succes(newData)
+                    result.value = Resource.success(newData)
                 }
             }
         }
     }
 
-    protected fun onFetchFailed(){}
+    protected fun onFetchFailed() {}
 
     protected abstract fun loadFromDB(): LiveData<ResultType>
 
@@ -51,18 +51,18 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
             result.removeSource(dbSource)
 
             when(response.status) {
-                StatusResponse.SUCCES ->
+                StatusResponse.SUCCESS ->
                     mExecutor.diskIO().execute {
                         saveCallResult(response.body)
                         mExecutor.mainThread().execute {
                             result.addSource(loadFromDB()) { newData ->
-                                result.value = Resource.succes(newData)
+                                result.value = Resource.success(newData)
                             }
                         }
                     }
                 StatusResponse.EMPTY -> mExecutor.mainThread().execute {
                     result.addSource(loadFromDB()) { newData ->
-                        result.value = Resource.succes(newData)
+                        result.value = Resource.success(newData)
                     }
                 }
                 StatusResponse.ERROR -> {

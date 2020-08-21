@@ -33,13 +33,16 @@ class AcademyRepository private constructor(
     override fun getAllCourses(): LiveData<Resource<List<CourseEntity>>> {
         return object : NetworkBoundResource<List<CourseEntity>, List<CourseResponse>>(appExecutors) {
 
-            override fun loadFromDB(): LiveData<List<CourseEntity>> = localDadaSource.getAllCourse()
+            public override fun loadFromDB(): LiveData<List<CourseEntity>> =
+                localDadaSource.getAllCourse()
 
-            override fun shouldFetch(data: List<CourseEntity>?): Boolean = data == null || data.isEmpty()
+            override fun shouldFetch(data: List<CourseEntity>?): Boolean =
+                data == null || data.isEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<CourseResponse>>> = remoteDataSource.getAllCourse()
+            public override fun createCall(): LiveData<ApiResponse<List<CourseResponse>>> =
+                remoteDataSource.getAllCourse()
 
-            override fun saveCallResult(data: List<CourseResponse>) {
+            public override fun saveCallResult(data: List<CourseResponse>) {
                 val courseList = ArrayList<CourseEntity>()
                 for (response in data) {
                     val course = CourseEntity(
@@ -58,11 +61,14 @@ class AcademyRepository private constructor(
 
     override fun getCourseWiithModules(courseId: String): LiveData<Resource<CourseWithModule>> {
         return object : NetworkBoundResource<CourseWithModule, List<ModuleResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<CourseWithModule> = localDadaSource.getCourseWithModules(courseId)
+            override fun loadFromDB(): LiveData<CourseWithModule> =
+                localDadaSource.getCourseWithModules(courseId)
 
-            override fun shouldFetch(data: CourseWithModule?): Boolean = data?.mModule == null || data.mModule.isEmpty()
+            override fun shouldFetch(data: CourseWithModule?): Boolean =
+                data?.mModule == null || data.mModule.isEmpty()
 
-            override fun createCall(): LiveData<ApiResponse<List<ModuleResponse>>> = remoteDataSource.getModules(courseId)
+            override fun createCall(): LiveData<ApiResponse<List<ModuleResponse>>> =
+                remoteDataSource.getModules(courseId)
 
             override fun saveCallResult(data: List<ModuleResponse>) {
                 val moduleList = ArrayList<ModuleEntity>()
@@ -114,13 +120,17 @@ class AcademyRepository private constructor(
 
     override fun getContent(moduleId: String): LiveData<Resource<ModuleEntity>> {
         return object : NetworkBoundResource<ModuleEntity, ContentResponse>(appExecutors) {
-            override fun loadFromDB(): LiveData<ModuleEntity> = localDadaSource.getModuleWithContent(moduleId)
+            override fun loadFromDB(): LiveData<ModuleEntity> =
+                localDadaSource.getModuleWithContent(moduleId)
 
-            override fun shouldFetch(data: ModuleEntity?): Boolean = data?.contentEntity == null
+            override fun shouldFetch(data: ModuleEntity?): Boolean =
+                data?.contentEntity == null
 
-            override fun createCall(): LiveData<ApiResponse<ContentResponse>> = remoteDataSource.getContent(moduleId)
+            override fun createCall(): LiveData<ApiResponse<ContentResponse>> =
+                remoteDataSource.getContent(moduleId)
 
-            override fun saveCallResult(data: ContentResponse) = localDadaSource.updateContent(data.content.toString(), moduleId)
+            override fun saveCallResult(data: ContentResponse) =
+                localDadaSource.updateContent(data.content.toString(), moduleId)
 
         }.asLiveData()
     }

@@ -4,8 +4,7 @@ import androidx.annotation.NonNull
 import androidx.room.*
 import com.example.academy.data.source.local.entity.ContentEntity
 
-@Entity(
-    tableName = "moduleentities",
+@Entity(tableName = "moduleentities",
     primaryKeys = ["moduleId", "courseId"],
     foreignKeys = [ForeignKey(entity = CourseEntity::class,
         parentColumns = ["courseId"],
@@ -30,7 +29,7 @@ data class ModuleEntity (
     @ColumnInfo(name = "position")
     var position: Int,
 
-    @NonNull
+    
     @ColumnInfo(name = "read")
     var read: Boolean = false
 ){

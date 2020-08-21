@@ -34,8 +34,6 @@ class AcademyFragment : Fragment() {
             val viewModel = ViewModelProvider(this, factory)[AcademyViewModel::class.java]
 
             val academyAdapter = AcademyAdapter()
-            progress_bar.visibility = View.VISIBLE
-
             viewModel.getCourses().observe(viewLifecycleOwner, Observer { courses ->
                 if (courses != null) {
                     when(courses.status) {
