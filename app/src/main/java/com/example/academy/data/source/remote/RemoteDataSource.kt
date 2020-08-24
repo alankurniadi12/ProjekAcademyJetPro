@@ -1,6 +1,7 @@
 package com.example.academy.data.source.remote
 
 import android.os.Handler
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.academy.data.source.remote.response.ContentResponse
@@ -40,10 +41,12 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
     fun getModules(courseId: String): LiveData<ApiResponse<List<ModuleResponse>>> {
         EspressoIdlingResource.increment()
         val resultModules = MutableLiveData<ApiResponse<List<ModuleResponse>>>()
+
         handler.postDelayed({
             resultModules.value = ApiResponse.success(jsonHelper.loadModule(courseId))
             EspressoIdlingResource.decrement()
         }, SERVICE_LATENCY_IN_MILLIS)
+        Log.e("RemoteDataSource", "getModule: ${resultModules.value}")
         return resultModules
     }
 
