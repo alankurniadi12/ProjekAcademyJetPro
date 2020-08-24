@@ -31,7 +31,7 @@ interface AcademyDao {
     @Query("SELECT * FROM moduleentities WHERE moduleId = :moduleId")
     fun getModuleById(moduleId: String): LiveData<ModuleEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     fun insertModules(module: List<ModuleEntity>)
 
     @Update

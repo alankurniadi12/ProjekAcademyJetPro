@@ -1,5 +1,6 @@
 package com.example.academy.ui.detail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -11,13 +12,16 @@ import com.example.academy.vo.Resource
 class DetailCourseViewModel(private val academyRepository: AcademyRepository): ViewModel() {
     val courseId = MutableLiveData<String>()
 
+
     fun setSelectedCourse(courseId: String) {
         this.courseId.value = courseId
     }
 
-    var courseModule: LiveData<Resource<CourseWithModule>> = Transformations.switchMap(courseId) { mCourseId ->
+    var courseModule: LiveData<Resource<CourseWithModule>> =
+        Transformations.switchMap(courseId) { mCourseId ->
         academyRepository.getCourseWiithModules(mCourseId)
     }
+
 
     fun setBookmark() {
         val moduleResource = courseModule.value

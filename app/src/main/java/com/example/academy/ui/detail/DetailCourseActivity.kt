@@ -50,6 +50,8 @@ class DetailCourseActivity : AppCompatActivity() {
             if (courseId != null){
                 viewModel.setSelectedCourse(courseId)
                 viewModel.courseModule.observe(this, Observer { courseWithModuleResource ->
+                    Log.e("DetailCourseActivity", "dataModule: "+courseWithModuleResource.data?.mModule)
+                    Log.e("DetailCourseActivity", "dataDetail: "+courseWithModuleResource.data?.mCourse)
                     if (courseWithModuleResource != null) {
                         when(courseWithModuleResource.status) {
                             Status.LOADING -> progress_bar.visibility = View.VISIBLE
@@ -93,7 +95,7 @@ class DetailCourseActivity : AppCompatActivity() {
         btn_start.setOnClickListener {
             val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java)
             intent.putExtra(CourseReaderActivity.EXTRA_COURSE_ID, courseEntity.courseId)
-            Log.d("btn_start", "Button Mulai Belajar pressed")
+            Log.d("DetailCourseActivity", "Button pressed: "+courseEntity.courseId)
             startActivity(intent)
         }
     }

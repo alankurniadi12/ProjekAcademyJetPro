@@ -2,6 +2,7 @@ package com.example.academy.ui.reader
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.academy.R
 import com.example.academy.ui.reader.content.ModuleContentFragment
@@ -25,6 +26,7 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
         if (bundle != null){
             val courseId = bundle.getString(EXTRA_COURSE_ID)
             if (courseId != null) {
+                Log.e("CourseReaderActivity", "Id from Detail: $courseId")
                 viewModel.setCourseId(courseId)
                 populateFragment()
             }

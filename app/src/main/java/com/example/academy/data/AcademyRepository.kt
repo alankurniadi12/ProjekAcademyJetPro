@@ -1,5 +1,6 @@
 package com.example.academy.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.academy.data.source.local.LocalDataSource
 import com.example.academy.data.source.local.entity.CourseEntity
@@ -18,7 +19,6 @@ class AcademyRepository private constructor(
     private val localDadaSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ): AcademyDataSource {
-    private val TAG = AcademyRepository::class.java.simpleName
 
     companion object {
         @Volatile
@@ -72,16 +72,16 @@ class AcademyRepository private constructor(
 
             override fun saveCallResult(data: List<ModuleResponse>) {
                 val moduleList = ArrayList<ModuleEntity>()
+                Log.e("AcademyRepository", "ModuleList: $moduleList")
                 for(response in data) {
                     val course = ModuleEntity(
                         response.moduleId,
-                        response.moduleId,
+                        response.courseId,
                         response.title,
                         response.position,
                         false)
                     moduleList.add(course)
                 }
-
                 localDadaSource.insertModules(moduleList)
             }
 
