@@ -76,6 +76,7 @@ class JsonHelper(private val context: Context) {
                 }
             }
         } catch (e: JSONException) {
+            Log.e("JsonHelper", "catch: $e")
             e.printStackTrace()
         }
         return list
