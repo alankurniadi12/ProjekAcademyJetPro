@@ -1,5 +1,6 @@
 package com.example.academy.ui.reader
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -23,7 +24,9 @@ class CourseReaderViewModel(private val academyRepository: AcademyRepository): V
 
     var modules: LiveData<Resource<List<ModuleEntity>>> = Transformations.switchMap(courseId) { mCourseId ->
         academyRepository.getAllModulesByCourse(mCourseId)
+
     }
+
 
     var selectedModule: LiveData<Resource<ModuleEntity>> = Transformations.switchMap(moduleId) { selectedPosition ->
         academyRepository.getContent(selectedPosition)

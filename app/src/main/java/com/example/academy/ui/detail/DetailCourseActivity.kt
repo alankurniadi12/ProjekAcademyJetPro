@@ -95,7 +95,7 @@ class DetailCourseActivity : AppCompatActivity() {
         btn_start.setOnClickListener {
             val intent = Intent(this@DetailCourseActivity, CourseReaderActivity::class.java)
             intent.putExtra(CourseReaderActivity.EXTRA_COURSE_ID, courseEntity.courseId)
-            Log.d("DetailCourseActivity", "Button pressed: "+courseEntity.courseId)
+            Log.e("DetailCourseActivity", "Button pressed: "+courseEntity.courseId)
             startActivity(intent)
         }
     }

@@ -65,20 +65,17 @@ class JsonHelper(private val context: Context) {
                     val moduleId = course.getString("moduleId")
                     val title = course.getString("title")
                     val position = course.getString("position")
-                    val courseResponse = ModuleResponse(
-                        moduleId,
-                        courseId,
-                        title,
-                        Integer.parseInt(position))
+                    val courseResponse = ModuleResponse(moduleId, courseId, title, Integer.parseInt(position))
                     list.add(courseResponse)
                     Log.e("JsonHelper", "Hasil Parsing: $courseResponse")
-                    Log.e("JsonHelper", "loadModule list: $list")
+
                 }
             }
         } catch (e: JSONException) {
             Log.e("JsonHelper", "catch: $e")
             e.printStackTrace()
         }
+        Log.e("JsonHelper", "loadModule list: $list")
         return list
     }
 

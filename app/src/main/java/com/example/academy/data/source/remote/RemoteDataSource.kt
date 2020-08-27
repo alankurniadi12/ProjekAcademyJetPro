@@ -9,7 +9,6 @@ import com.example.academy.data.source.remote.response.CourseResponse
 import com.example.academy.data.source.remote.response.ModuleResponse
 import com.example.academy.utils.EspressoIdlingResource
 import com.example.academy.utils.JsonHelper
-import com.example.academy.utils.LiveDataTestUtil
 
 
 class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
