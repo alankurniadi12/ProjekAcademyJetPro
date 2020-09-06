@@ -14,7 +14,7 @@ import com.example.academy.data.source.remote.response.ModuleResponse
 import com.example.academy.vo.Resource
 import com.example.academy.utils.AppExecutors
 
-class AcademyRepository private constructor(
+class AcademyRepository constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDadaSource: LocalDataSource,
     private val appExecutors: AppExecutors

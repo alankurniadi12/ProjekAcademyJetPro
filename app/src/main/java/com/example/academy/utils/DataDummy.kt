@@ -1,6 +1,8 @@
 package com.example.academy.utils
 
+import com.example.academy.data.source.local.entity.ContentEntity
 import com.example.academy.data.source.local.entity.CourseEntity
+import com.example.academy.data.source.local.entity.CourseWithModule
 import com.example.academy.data.source.local.entity.ModuleEntity
 import com.example.academy.data.source.remote.response.ContentResponse
 import com.example.academy.data.source.remote.response.CourseResponse
@@ -8,7 +10,7 @@ import com.example.academy.data.source.remote.response.ModuleResponse
 
 object DataDummy {
 
-    fun generateDummyCourses(): ArrayList<CourseEntity> {
+    fun generateDummyCourses(): List<CourseEntity> {
 
         val courses = ArrayList<CourseEntity>()
 
@@ -215,7 +217,20 @@ object DataDummy {
         return modules
     }
 
-    fun generateRemoteDummyContent(moduleId: String): ContentResponse {
-        return ContentResponse(moduleId, "this is a dummy content")
+    fun generateRemoteDummyContent(moduleId: String): ContentResponse =
+        ContentResponse(moduleId, "this is a dummy content")
+
+    fun generateDummyCourseWithModules(course: CourseEntity, bookmarked: Boolean): CourseWithModule {
+        course.bookmarked = bookmarked
+        return CourseWithModule(course, generateDummyModules(course.courseId))
+    }
+
+    fun generateDummyContent(moduleId: String): ContentEntity =
+        ContentEntity("this is a dummy content")
+
+    fun generateDummyModuleWithContent(courseId: String): ModuleEntity {
+        val moduleEntity = generateDummyModules(courseId)[0]
+        moduleEntity.contentEntity = generateDummyContent(moduleEntity.moduleId)
+        return moduleEntity
     }
 }
