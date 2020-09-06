@@ -1,6 +1,5 @@
 package com.example.academy.ui.detail
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -17,8 +16,7 @@ class DetailCourseViewModel(private val academyRepository: AcademyRepository): V
         this.courseId.value = courseId
     }
 
-    var courseModule: LiveData<Resource<CourseWithModule>> =
-        Transformations.switchMap(courseId) { mCourseId ->
+    var courseModule: LiveData<Resource<CourseWithModule>> = Transformations.switchMap(courseId) { mCourseId ->
         academyRepository.getCourseWiithModules(mCourseId)
     }
 

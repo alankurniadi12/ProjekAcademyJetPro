@@ -2,6 +2,8 @@ package com.example.academy.utils
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.academy.data.source.remote.response.ContentResponse
 import com.example.academy.data.source.remote.response.CourseResponse
 import com.example.academy.data.source.remote.response.ModuleResponse
@@ -72,10 +74,9 @@ class JsonHelper(private val context: Context) {
                 }
             }
         } catch (e: JSONException) {
-            Log.e("JsonHelper", "catch: $e")
             e.printStackTrace()
         }
-        Log.e("JsonHelper", "loadModule list: $list")
+        Log.e("JsonHelper", "Hasil return: $list")
         return list
     }
 

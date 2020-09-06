@@ -12,7 +12,7 @@ interface AcademyDao {
     @Query("SELECT * FROM courseentities")
     fun getCourse(): LiveData<List<CourseEntity>>
 
-    @Query("SELECT * FROM courseentities WHERE bookmarked = 1")
+    @Query("SELECT * FROM courseentities where bookmarked = 1")
     fun getBookmarkedCourse(): LiveData<List<CourseEntity>>
 
     @Transaction
@@ -31,7 +31,7 @@ interface AcademyDao {
     @Query("SELECT * FROM moduleentities WHERE moduleId = :moduleId")
     fun getModuleById(moduleId: String): LiveData<ModuleEntity>
 
-    @Update
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertModules(module: List<ModuleEntity>)
 
     @Update

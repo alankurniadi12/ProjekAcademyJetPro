@@ -11,7 +11,6 @@ import com.example.academy.data.source.local.entity.ContentEntity
         childColumns = ["courseId"])],
     indices = [Index(value = ["moduleId"]),
         Index(value = ["courseId"])])
-
 data class ModuleEntity (
     @NonNull
     @ColumnInfo(name = "moduleId")

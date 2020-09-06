@@ -2,6 +2,7 @@ package com.example.academy.ui.reader.list
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +51,7 @@ class ModuleListFragment : Fragment(), MyAdapterClickListener {
 
 
         viewModel.modules.observe(viewLifecycleOwner, Observer { modulesEntities ->
+            Log.e("ModuleListFragment", "dataModule: ${modulesEntities.data}")
             if (modulesEntities != null) {
                 when(modulesEntities.status) {
                     Status.LOADING -> progress_bar.visibility = View.VISIBLE

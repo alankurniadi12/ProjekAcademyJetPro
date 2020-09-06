@@ -38,6 +38,7 @@ class CourseReaderViewModel(private val academyRepository: AcademyRepository): V
 
     fun getModuleSize(): Int {
         if (modules.value != null) {
+            Log.e("CourseReaderViewModel", "dataModule: ${modules.value.toString()}")
             val moduleEntities = modules.value?.data
             if (moduleEntities != null) {
                 return moduleEntities.size

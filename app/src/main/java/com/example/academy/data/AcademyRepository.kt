@@ -26,7 +26,7 @@ class AcademyRepository private constructor(
 
         fun getInstance(remoteData: RemoteDataSource, localData: LocalDataSource, appExecutors: AppExecutors): AcademyRepository =
             instance ?: synchronized(this) {
-            instance ?: AcademyRepository(remoteData, localData, appExecutors)
+                instance ?: AcademyRepository(remoteData, localData, appExecutors)
         }
     }
 
@@ -72,7 +72,7 @@ class AcademyRepository private constructor(
 
             override fun saveCallResult(data: List<ModuleResponse>) {
                 val moduleList = ArrayList<ModuleEntity>()
-                Log.e("AcademyRepository", "ModuleList: $moduleList")
+
                 for(response in data) {
                     val course = ModuleEntity(
                         response.moduleId,
@@ -82,6 +82,7 @@ class AcademyRepository private constructor(
                         false)
                     moduleList.add(course)
                 }
+                Log.e("AcademyRepository", "ModuleList: $moduleList")
                 localDadaSource.insertModules(moduleList)
             }
 
@@ -111,6 +112,7 @@ class AcademyRepository private constructor(
                     )
                     moduleList.add(course)
                 }
+                Log.e("AcademyRepository", "getAllModulesByCourese: $moduleList")
                 localDadaSource.insertModules(moduleList)
             }
 
